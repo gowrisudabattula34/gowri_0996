@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Special Days & Festivals</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f8ff;
+      text-align: center;
+      padding: 50px;
+    }
+    h2 {
+      color: #2b6cb0;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #2b6cb0;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1a4f80;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #d35400;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Check Special Days & Festivals</h2>
+  <p>Select a date to see if it’s a special day or festival 🎉</p>
+
+  <input type="date" id="dateInput">
+  <button onclick="checkFestival()">Check</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    // Predefined list of festivals & special days
+    const specialDays = {
+      "01-01": "New Year 🎉",
+      "01-14": "Makar Sankranti / Pongal 🌾",
+      "01-26": "Republic Day 🇮🇳",
+      "08-15": "Independence Day 🇮🇳",
+      "10-02": "Gandhi Jayanti 🕊️",
+      "11-01": "Diwali 🪔",
+      "12-25": "Christmas 🎄"
+    };
+
+    function checkFestival() {
+      const inputDate = document.getElementById("dateInput").value;
+      if (!inputDate) {
+        document.getElementById("result").innerHTML = "⚠️ Please select a date.";
+        return;
+      }
+
+      // Extract MM-DD
+      const dateObj = new Date(inputDate);
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const day = String(dateObj.getDate()).padStart(2, '0');
+      const key = month + "-" + day;
+
+      if (specialDays[key]) {
+        document.getElementById("result").innerHTML = 
+          "✅ " + dateObj.toDateString() + " is " + specialDays[key];
+      } else {
+        document.getElementById("result").innerHTML = 
+          "❌ " + dateObj.toDateString() + " is not in the festival list.";
+      }
+    }
+  </script>
+
+</body>
+</html>
